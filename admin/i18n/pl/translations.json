@@ -2,5 +2,7 @@
     "my-contabo adapter settings": "Ustawienia adaptera dla my-contabo",
     "clientId": "Client Id",
     "clientSecret": "Client Secret",
-    "_configDescription": "Proszę wstawić tutaj swoje dane uwierzytelniające. Znajdź je na swoim koncie MyContabo > API"
+    "_configDescription": "Proszę wstawić tutaj swoje dane uwierzytelniające. Znajdź je na swoim koncie MyContabo > API",
+    "_explanationGeneral": "Proszę wstawić tutaj swoje dane uwierzytelniające. Znajdź je na swoim koncie MyContabo > API",
+    "_explanationUser": "Proszę wstawić tutaj dane uwierzytelniające użytkownika, znajdziesz je również na swoim koncie."
 }

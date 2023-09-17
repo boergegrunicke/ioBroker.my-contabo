@@ -76,7 +76,9 @@
 	},
 	"native": {
 		"clientId": "",
-		"clientSecret": ""
+		"clientSecret": "",
+		"apiUser": "",
+		"apiPassword": ""
 	},
 	"objects": [],
 	"instanceObjects": []

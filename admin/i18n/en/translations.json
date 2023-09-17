@@ -2,5 +2,6 @@
 	"my-contabo adapter settings": "Adapter settings for my-contabo",
 	"clientId": "Client Id",
 	"clientSecret": "Client Secret",
-	"_explanation": "Please insert here your credentials. Find them in your MyContabo account > API"
+	"_explanationGeneral": "Please insert here your credentials. Find them in your MyContabo account > API",
+	"_explanationUser": "Please insert here the user credentials, you find them also in yout account."
 }

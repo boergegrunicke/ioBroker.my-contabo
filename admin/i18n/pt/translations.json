@@ -2,5 +2,7 @@
     "my-contabo adapter settings": "Configurações do adaptador para my-contabo",
     "clientId": "Client Id",
     "clientSecret": "Client Secret",
-    "_configDescription": "Por favor insira aqui as suas credenciais. Encontre-os na sua conta MyContabo > API"
+    "_configDescription": "Por favor insira aqui as suas credenciais. Encontre-os na sua conta MyContabo > API",
+    "_explanationGeneral": "Por favor insira aqui as suas credenciais. Encontre-os na sua conta MyContabo > API",
+    "_explanationUser": "Por favor insira aqui as credenciais do usuário, você também as encontrará em sua conta."
 }

@@ -2,27 +2,48 @@
 	"i18n": true,
 	"type": "panel",
 	"items": {
-		"_description": {
+		"_descriptionClient": {
 			"type": "staticText",
 			"sm": 12,
 			"md": 12,
 			"lg": 12,
-			"text": "_explanation"
+			"text": "_explanationGeneral"
 		},
 		"clientId": {
 			"type": "text",
 			"label": "Client Id",
 			"newLine": true,
-			"sm": 3,
-			"md": 3,
+			"sm": 10,
+			"md": 6,
 			"lg": 3
 		},
 		"clientSecret": {
 			"type": "text",
 			"label": "Client Secret",
+			"sm": 10,
+			"md": 6,
+			"lg": 3
+		},
+		"_descriptionUser": {
+			"type": "staticText",
+			"sm": 12,
+			"md": 12,
+			"lg": 12,
+			"text": "_explanationUser"
+		},
+		"apiUser": {
+			"type": "text",
+			"label": "API User",
 			"newLine": true,
-			"sm": 3,
-			"md": 3,
+			"sm": 10,
+			"md": 6,
+			"lg": 3
+		},
+		"apiPassword": {
+			"type": "text",
+			"label": "API Password",
+			"sm": 10,
+			"md": 6,
 			"lg": 3
 		}
 	}

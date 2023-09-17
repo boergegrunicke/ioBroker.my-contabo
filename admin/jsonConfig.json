@@ -1,0 +1,16 @@
+{
+	"i18n": true,
+	"type": "panel",
+	"items": {
+		"clientId": {
+			"type": "text",
+			"label": "Client Id",
+			"newLine": true
+		},
+		"clientSecret": {
+			"type": "text",
+			"label": "Client Secret",
+			"newLine": true
+		}
+	}
+}

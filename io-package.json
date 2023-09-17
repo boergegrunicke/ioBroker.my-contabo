@@ -1,0 +1,79 @@
+{
+	"common": {
+		"name": "my-contabo",
+		"version": "0.0.1",
+		"news": {
+			"0.0.1": {
+				"en": "initial release",
+				"de": "Erstveröffentlichung",
+				"ru": "Начальная версия",
+				"pt": "lançamento inicial",
+				"nl": "Eerste uitgave",
+				"fr": "Première version",
+				"it": "Versione iniziale",
+				"es": "Versión inicial",
+				"pl": "Pierwsze wydanie",
+				"zh-cn": "首次出版"
+			}
+		},
+		"title": "MyContabo",
+		"titleLang": {
+			"en": "MyContabo",
+			"de": "MyContabo",
+			"ru": "MyContabo",
+			"pt": "MyContabo",
+			"nl": "MyContabo",
+			"fr": "MyContabo",
+			"it": "MyContabo",
+			"es": "MyContabo",
+			"pl": "MyContabo",
+			"zh-cn": "MyContabo"
+		},
+		"desc": {
+			"en": "Adapter to conntect to my.contabo.com and read information via the api",
+			"de": "Adapter to conntect to my.contabo.com and read information via the api",
+			"ru": "Adapter to conntect to my.contabo.com and read information via the api",
+			"pt": "Adapter to conntect to my.contabo.com and read information via the api",
+			"nl": "Adapter to conntect to my.contabo.com and read information via the api",
+			"fr": "Adapter to conntect to my.contabo.com and read information via the api",
+			"it": "Adapter to conntect to my.contabo.com and read information via the api",
+			"es": "Adapter to conntect to my.contabo.com and read information via the api",
+			"pl": "Adapter to conntect to my.contabo.com and read information via the api",
+			"zh-cn": "Adapter to conntect to my.contabo.com and read information via the api"
+		},
+		"authors": ["Børge Grunicke <boerge@grunicke.de>"],
+		"keywords": ["contabo", "hosting", "server"],
+		"license": "MIT",
+		"platform": "Javascript/Node.js",
+		"main": "build/main.js",
+		"icon": "my-contabo.png",
+		"enabled": true,
+		"extIcon": "https://raw.githubusercontent.com/boergegrunicke/ioBroker.my-contabo/main/admin/my-contabo.png",
+		"readme": "https://github.com/boergegrunicke/ioBroker.my-contabo/blob/main/README.md",
+		"loglevel": "info",
+		"mode": "daemon",
+		"type": "communication",
+		"compact": true,
+		"connectionType": "cloud",
+		"dataSource": "poll",
+		"adminUI": {
+			"config": "json"
+		},
+		"dependencies": [
+			{
+				"js-controller": ">=3.3.22"
+			}
+		],
+		"globalDependencies": [
+			{
+				"admin": ">=5.1.13"
+			}
+		]
+	},
+	"native": {
+		"clientId": "",
+		"clientSecret": ""
+	},
+	"objects": [],
+	"instanceObjects": []
+}

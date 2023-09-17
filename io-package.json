@@ -13,7 +13,8 @@
 				"it": "Versione iniziale",
 				"es": "Versión inicial",
 				"pl": "Pierwsze wydanie",
-				"zh-cn": "首次出版"
+				"zh-cn": "首次出版",
+				"uk": "початковий випуск"
 			}
 		},
 		"title": "MyContabo",
@@ -27,7 +28,8 @@
 			"it": "MyContabo",
 			"es": "MyContabo",
 			"pl": "MyContabo",
-			"zh-cn": "MyContabo"
+			"zh-cn": "MyContabo",
+			"uk": "MyContabo"
 		},
 		"desc": {
 			"en": "Adapter to conntect to my.contabo.com and read information via the api",
@@ -39,7 +41,8 @@
 			"it": "Adapter to conntect to my.contabo.com and read information via the api",
 			"es": "Adapter to conntect to my.contabo.com and read information via the api",
 			"pl": "Adapter to conntect to my.contabo.com and read information via the api",
-			"zh-cn": "Adapter to conntect to my.contabo.com and read information via the api"
+			"zh-cn": "Adapter to conntect to my.contabo.com and read information via the api",
+			"uk": "Адаптер для підключення до my.contabo.com і читання інформації через api"
 		},
 		"authors": ["Børge Grunicke <boerge@grunicke.de>"],
 		"keywords": ["contabo", "hosting", "server"],
@@ -51,7 +54,8 @@
 		"extIcon": "https://raw.githubusercontent.com/boergegrunicke/ioBroker.my-contabo/main/admin/my-contabo.png",
 		"readme": "https://github.com/boergegrunicke/ioBroker.my-contabo/blob/main/README.md",
 		"loglevel": "info",
-		"mode": "daemon",
+		"mode": "schedule",
+		"schedule": "*/5 * * * *",
 		"type": "communication",
 		"compact": true,
 		"connectionType": "cloud",

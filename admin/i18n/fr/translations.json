@@ -1,5 +1,6 @@
 {
-	"my-contabo adapter settings": "Paramètres d'adaptateur pour my-contabo",
-	"clientId": "Client Id",
-	"clientSecret": "Client Secret"
+    "my-contabo adapter settings": "Paramètres d'adaptateur pour my-contabo",
+    "clientId": "Client Id",
+    "clientSecret": "Client Secret",
+    "_configDescription": "Veuillez insérer ici vos informations d'identification. Retrouvez-les dans votre compte MyContabo > API"
 }

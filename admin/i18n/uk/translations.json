@@ -1,0 +1,6 @@
+{
+    "my-contabo adapter settings": "Налаштування адаптера для my-contabo",
+    "clientId": "Ідентифікатор клієнта",
+    "clientSecret": "Секрет клієнта",
+    "_configDescription": "Введіть тут свої облікові дані. Знайдіть їх у своєму обліковому записі MyContabo > API"
+}

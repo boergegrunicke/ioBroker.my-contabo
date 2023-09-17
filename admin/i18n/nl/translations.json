@@ -1,5 +1,6 @@
 {
-	"my-contabo adapter settings": "Adapterinstellingen voor my-contabo",
-	"clientId": "Client Id",
-	"clientSecret": "Client Secret"
+    "my-contabo adapter settings": "Adapterinstellingen voor my-contabo",
+    "clientId": "Client Id",
+    "clientSecret": "Client Secret",
+    "_configDescription": "Voer hier uw inloggegevens in. Vind ze in uw MyContabo-account > API"
 }

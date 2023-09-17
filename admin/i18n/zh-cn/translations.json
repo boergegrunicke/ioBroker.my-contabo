@@ -1,5 +1,6 @@
 {
-	"my-contabo adapter settings": "my-contabo的适配器设置",
-	"clientId": "Client Id",
-	"clientSecret": "Client Secret"
+    "my-contabo adapter settings": "my-contabo的适配器设置",
+    "clientId": "Client Id",
+    "clientSecret": "Client Secret",
+    "_configDescription": "请在此处插入您的凭据。在您的 MyContabo 帐户 > API 中找到它们"
 }

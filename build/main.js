@@ -18,6 +18,7 @@ var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__ge
   mod
 ));
 var utils = __toESM(require("@iobroker/adapter-core"));
+const axios = require("axios").default;
 class MyContabo extends utils.Adapter {
   constructor(options = {}) {
     super({
@@ -29,27 +30,23 @@ class MyContabo extends utils.Adapter {
     this.on("unload", this.onUnload.bind(this));
   }
   async onReady() {
-    this.log.info("config clientId: " + this.config.clientId);
-    this.log.info("config clientSecret: " + this.config.clientSecret);
-    await this.setObjectNotExistsAsync("testVariable", {
-      type: "state",
-      common: {
-        name: "testVariable",
-        type: "boolean",
-        role: "indicator",
-        read: true,
-        write: true
-      },
-      native: {}
+    const requestBody = {
+      grant_type: "password",
+      client_id: this.config.clientId,
+      client_secret: this.config.clientSecret,
+      username: this.config.apiUser,
+      password: this.config.apiPassword
+    };
+    console.info(requestBody);
+    axios.post("https://auth.contabo.com/auth/realms/contabo/protocol/openid-connect/token", requestBody, {
+      headers: {
+        "Content-Type": "application/json"
+      }
+    }).then(function({ data }) {
+      console.log(data);
+    }).catch(function(error) {
+      console.error(error);
     });
-    this.subscribeStates("testVariable");
-    await this.setStateAsync("testVariable", true);
-    await this.setStateAsync("testVariable", { val: true, ack: true });
-    await this.setStateAsync("testVariable", { val: true, ack: true, expire: 30 });
-    let result = await this.checkPasswordAsync("admin", "iobroker");
-    this.log.info("check user admin pw iobroker: " + result);
-    result = await this.checkGroupAsync("admin", "admin");
-    this.log.info("check group user admin group admin: " + result);
   }
   onUnload(callback) {
     try {

@@ -6,6 +6,8 @@ declare global {
 		interface AdapterConfig {
 			clientId: string;
 			clientSecret: string;
+			apiUser: string;
+			apiPassword: string;
 		}
 	}
 }

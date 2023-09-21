@@ -5,6 +5,7 @@
 // The adapter-core module gives you access to the core ioBroker functions
 // you need to create an adapter
 import * as utils from '@iobroker/adapter-core';
+const axios = require('axios').default;
 
 // Load your modules here, e.g.:
 // import * as fs from "fs";
@@ -27,6 +28,27 @@ class MyContabo extends utils.Adapter {
 	 */
 	private async onReady(): Promise<void> {
 		// Initialize your adapter here
+
+		const requestBody = {
+			grant_type: 'password',
+			client_id: this.config.clientId,
+			client_secret: this.config.clientSecret,
+			username: this.config.apiUser,
+			password: this.config.apiPassword,
+		};
+		console.info(requestBody);
+		axios
+			.post('https://auth.contabo.com/auth/realms/contabo/protocol/openid-connect/token', requestBody, {
+				headers: {
+					'Content-Type': 'application/json',
+				},
+			})
+			.then(function ({ data }: { data: string }) {
+				console.log(data); // ...
+			})
+			.catch(function (error: any) {
+				console.error(error);
+			});
 	}
 
 	/**

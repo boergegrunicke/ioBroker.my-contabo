@@ -9,6 +9,9 @@ import axios from 'axios';
 
 import querystring from 'querystring';
 
+const AUTH_URL = 'https://auth.contabo.com/auth/realms/contabo/protocol/openid-connect/token';
+const BASE_URL = 'https://api.contabo.com/v1/';
+
 // Load your modules here, e.g.:
 // import * as fs from "fs";
 
@@ -30,15 +33,15 @@ class MyContabo extends utils.Adapter {
 	 */
 	private async onReady(): Promise<void> {
 		// Initialize your adapter here
-		const token = await this.getToken();
-		this.log.info('huhu ...');
+		const token = await this.getToken(AUTH_URL);
+		this.log.info('huhu ...' + token);
 	}
 
-	private async getToken(): Promise<string> {
+	private async getToken(authUrl: string): Promise<string> {
 		let reponse = '';
 		await axios
 			.post(
-				'https://auth.contabo.com/auth/realms/contabo/protocol/openid-connect/token',
+				authUrl,
 				querystring.stringify({
 					grant_type: 'password',
 					client_id: this.config.clientId,
@@ -58,7 +61,7 @@ class MyContabo extends utils.Adapter {
 				this.setState('info.connection', { val: true, ack: true });
 				reponse = res.access_token;
 			})
-			.catch(function (error: any) {
+			.catch((error: any) => {
 				console.error(error); // ...
 				this.setState('info.connection', { val: false, ack: true });
 				throw new Error('Failed to get token :  ' + error.message);

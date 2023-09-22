@@ -20,6 +20,8 @@ var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__ge
 var utils = __toESM(require("@iobroker/adapter-core"));
 var import_axios = __toESM(require("axios"));
 var import_querystring = __toESM(require("querystring"));
+const AUTH_URL = "https://auth.contabo.com/auth/realms/contabo/protocol/openid-connect/token";
+const BASE_URL = "https://api.contabo.com/v1/";
 class MyContabo extends utils.Adapter {
   constructor(options = {}) {
     super({
@@ -31,13 +33,13 @@ class MyContabo extends utils.Adapter {
     this.on("unload", this.onUnload.bind(this));
   }
   async onReady() {
-    const token = await this.getToken();
-    this.log.info("huhu ...");
+    const token = await this.getToken(AUTH_URL);
+    this.log.info("huhu ..." + token);
   }
-  async getToken() {
+  async getToken(authUrl) {
     let reponse = "";
     await import_axios.default.post(
-      "https://auth.contabo.com/auth/realms/contabo/protocol/openid-connect/token",
+      authUrl,
       import_querystring.default.stringify({
         grant_type: "password",
         client_id: this.config.clientId,
@@ -55,7 +57,7 @@ class MyContabo extends utils.Adapter {
       this.loadData(res.access_token);
       this.setState("info.connection", { val: true, ack: true });
       reponse = res.access_token;
-    }).catch(function(error) {
+    }).catch((error) => {
       console.error(error);
       this.setState("info.connection", { val: false, ack: true });
       throw new Error("Failed to get token :  " + error.message);

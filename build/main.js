@@ -19,8 +19,12 @@ var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__ge
 ));
 var utils = __toESM(require("@iobroker/adapter-core"));
 var import_axios = __toESM(require("axios"));
+var import_crypto = require("crypto");
 var import_querystring = __toESM(require("querystring"));
 const AUTH_URL = "https://auth.contabo.com/auth/realms/contabo/protocol/openid-connect/token";
+const BASE_URL = "https://api.contabo.com/v1/";
+const COMPUTE_URL = `${BASE_URL}compute/`;
+const INSTANCES_URL = `${COMPUTE_URL}instances`;
 class MyContabo extends utils.Adapter {
   constructor(options = {}) {
     super({
@@ -32,8 +36,16 @@ class MyContabo extends utils.Adapter {
     this.on("unload", this.onUnload.bind(this));
   }
   async onReady() {
-    const token = await this.getToken(AUTH_URL);
-    this.log.info("huhu ..." + token);
+    if (this.config.clientId.length === 0 || this.config.clientSecret.length === 0 || this.config.apiUser.length === 0 || this.config.apiPassword.length === 0) {
+      this.log.error("login credentials not configured");
+    } else {
+      const token = await this.getToken(AUTH_URL);
+      if (token.length !== 0) {
+        this.loadData(token);
+      } else {
+        this.log.error("failed to get token from api");
+      }
+    }
   }
   async getToken(authUrl) {
     let reponse = "";
@@ -64,7 +76,20 @@ class MyContabo extends utils.Adapter {
     return reponse;
   }
   loadData(token) {
-    this.log.info("token : " + token);
+    this.loadInstances(token);
+  }
+  async loadInstances(token) {
+    await import_axios.default.get(INSTANCES_URL, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+        "x-request-id": (0, import_crypto.randomUUID)()
+      }
+    }).then((response) => {
+      this.log.info(response.data.toString());
+    }).catch((error) => {
+      this.log.error("error : " + error);
+    });
   }
   onUnload(callback) {
     try {

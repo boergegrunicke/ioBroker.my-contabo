@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../src/model/Pagination.ts"],
+  "sourcesContent": ["export interface Pagination {\n\tsize: number;\n\ttotalElements: number;\n\ttotalPages: number;\n\tpage: number;\n}\n"],
+  "mappings": ";;;;;;;;;;;;;;AAAA;AAAA;",
+  "names": []
+}

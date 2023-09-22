@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../src/model/InstancesResponse.ts"],
+  "sourcesContent": ["import { Pagination } from './Pagination';\n\nexport interface InstancesResponse {\n\t_pagination: Pagination;\n}\n"],
+  "mappings": ";;;;;;;;;;;;;;AAAA;AAAA;",
+  "names": []
+}

@@ -40,7 +40,7 @@
 			"lg": 3
 		},
 		"apiPassword": {
-			"type": "text",
+			"type": "password",
 			"label": "API Password",
 			"sm": 10,
 			"md": 6,

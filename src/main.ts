@@ -6,11 +6,14 @@
 // you need to create an adapter
 import * as utils from '@iobroker/adapter-core';
 import axios from 'axios';
-
+import { randomUUID } from 'crypto';
 import querystring from 'querystring';
+import { InstancesResponse } from './model/InstancesResponse';
 
 const AUTH_URL = 'https://auth.contabo.com/auth/realms/contabo/protocol/openid-connect/token';
-//const BASE_URL = 'https://api.contabo.com/v1/';
+const BASE_URL = 'https://api.contabo.com/v1/';
+const COMPUTE_URL = `${BASE_URL}compute/`;
+const INSTANCES_URL = `${COMPUTE_URL}instances`;
 
 // Load your modules here, e.g.:
 // import * as fs from "fs";
@@ -33,8 +36,21 @@ class MyContabo extends utils.Adapter {
 	 */
 	private async onReady(): Promise<void> {
 		// Initialize your adapter here
-		const token = await this.getToken(AUTH_URL);
-		this.log.info('huhu ...' + token);
+		if (
+			this.config.clientId.length === 0 ||
+			this.config.clientSecret.length === 0 ||
+			this.config.apiUser.length === 0 ||
+			this.config.apiPassword.length === 0
+		) {
+			this.log.error('login credentials not configured');
+		} else {
+			const token = await this.getToken(AUTH_URL);
+			if (token.length !== 0) {
+				this.loadData(token);
+			} else {
+				this.log.error('failed to get token from api');
+			}
+		}
 	}
 
 	private async getToken(authUrl: string): Promise<string> {
@@ -70,7 +86,26 @@ class MyContabo extends utils.Adapter {
 	}
 
 	private loadData(token: string): void {
-		this.log.info('token : ' + token);
+		//this.log.info('token : ' + token);
+		this.loadInstances(token);
+	}
+
+	private async loadInstances(token: string): Promise<void> {
+		await axios
+			.get<InstancesResponse>(INSTANCES_URL, {
+				headers: {
+					'Content-Type': 'application/json',
+					Authorization: `Bearer ${token}`,
+					'x-request-id': randomUUID(),
+				},
+			})
+			.then((response) => {
+				// ...
+				this.log.info(response.data.toString());
+			})
+			.catch((error: any) => {
+				this.log.error('error : ' + error);
+			});
 	}
 
 	/**

@@ -5,7 +5,9 @@
 // The adapter-core module gives you access to the core ioBroker functions
 // you need to create an adapter
 import * as utils from '@iobroker/adapter-core';
-const axios = require('axios').default;
+import axios from 'axios';
+
+import querystring from 'querystring';
 
 // Load your modules here, e.g.:
 // import * as fs from "fs";
@@ -28,27 +30,44 @@ class MyContabo extends utils.Adapter {
 	 */
 	private async onReady(): Promise<void> {
 		// Initialize your adapter here
+		const token = await this.getToken();
+		this.log.info('huhu ...');
+	}
 
-		const requestBody = {
-			grant_type: 'password',
-			client_id: this.config.clientId,
-			client_secret: this.config.clientSecret,
-			username: this.config.apiUser,
-			password: this.config.apiPassword,
-		};
-		console.info(requestBody);
-		axios
-			.post('https://auth.contabo.com/auth/realms/contabo/protocol/openid-connect/token', requestBody, {
-				headers: {
-					'Content-Type': 'application/json',
+	private async getToken(): Promise<string> {
+		let reponse = '';
+		await axios
+			.post(
+				'https://auth.contabo.com/auth/realms/contabo/protocol/openid-connect/token',
+				querystring.stringify({
+					grant_type: 'password',
+					client_id: this.config.clientId,
+					client_secret: this.config.clientSecret,
+					username: this.config.apiUser,
+					password: this.config.apiPassword,
+				}),
+				{
+					headers: {
+						'Content-Type': 'application/x-www-form-urlencoded',
+					},
 				},
-			})
-			.then(function ({ data }: { data: string }) {
-				console.log(data); // ...
+			)
+			.then(({ data }: { data: string }) => {
+				const res = typeof data === 'string' ? JSON.parse(data) : data;
+				this.loadData(res.access_token);
+				this.setState('info.connection', { val: true, ack: true });
+				reponse = res.access_token;
 			})
 			.catch(function (error: any) {
-				console.error(error);
+				console.error(error); // ...
+				this.setState('info.connection', { val: false, ack: true });
+				throw new Error('Failed to get token :  ' + error.message);
 			});
+		return reponse;
+	}
+
+	private loadData(token: string): void {
+		this.log.info('token : ' + token);
 	}
 
 	/**

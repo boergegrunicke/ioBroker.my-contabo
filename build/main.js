@@ -18,7 +18,8 @@ var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__ge
   mod
 ));
 var utils = __toESM(require("@iobroker/adapter-core"));
-const axios = require("axios").default;
+var import_axios = __toESM(require("axios"));
+var import_querystring = __toESM(require("querystring"));
 class MyContabo extends utils.Adapter {
   constructor(options = {}) {
     super({
@@ -30,23 +31,39 @@ class MyContabo extends utils.Adapter {
     this.on("unload", this.onUnload.bind(this));
   }
   async onReady() {
-    const requestBody = {
-      grant_type: "password",
-      client_id: this.config.clientId,
-      client_secret: this.config.clientSecret,
-      username: this.config.apiUser,
-      password: this.config.apiPassword
-    };
-    console.info(requestBody);
-    axios.post("https://auth.contabo.com/auth/realms/contabo/protocol/openid-connect/token", requestBody, {
-      headers: {
-        "Content-Type": "application/json"
+    const token = await this.getToken();
+    this.log.info("huhu ...");
+  }
+  async getToken() {
+    let reponse = "";
+    await import_axios.default.post(
+      "https://auth.contabo.com/auth/realms/contabo/protocol/openid-connect/token",
+      import_querystring.default.stringify({
+        grant_type: "password",
+        client_id: this.config.clientId,
+        client_secret: this.config.clientSecret,
+        username: this.config.apiUser,
+        password: this.config.apiPassword
+      }),
+      {
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded"
+        }
       }
-    }).then(function({ data }) {
-      console.log(data);
+    ).then(({ data }) => {
+      const res = typeof data === "string" ? JSON.parse(data) : data;
+      this.loadData(res.access_token);
+      this.setState("info.connection", { val: true, ack: true });
+      reponse = res.access_token;
     }).catch(function(error) {
       console.error(error);
+      this.setState("info.connection", { val: false, ack: true });
+      throw new Error("Failed to get token :  " + error.message);
     });
+    return reponse;
+  }
+  loadData(token) {
+    this.log.info("token : " + token);
   }
   onUnload(callback) {
     try {

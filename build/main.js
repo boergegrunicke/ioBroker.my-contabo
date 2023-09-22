@@ -21,7 +21,6 @@ var utils = __toESM(require("@iobroker/adapter-core"));
 var import_axios = __toESM(require("axios"));
 var import_querystring = __toESM(require("querystring"));
 const AUTH_URL = "https://auth.contabo.com/auth/realms/contabo/protocol/openid-connect/token";
-const BASE_URL = "https://api.contabo.com/v1/";
 class MyContabo extends utils.Adapter {
   constructor(options = {}) {
     super({

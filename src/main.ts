@@ -10,7 +10,7 @@ import axios from 'axios';
 import querystring from 'querystring';
 
 const AUTH_URL = 'https://auth.contabo.com/auth/realms/contabo/protocol/openid-connect/token';
-const BASE_URL = 'https://api.contabo.com/v1/';
+//const BASE_URL = 'https://api.contabo.com/v1/';
 
 // Load your modules here, e.g.:
 // import * as fs from "fs";

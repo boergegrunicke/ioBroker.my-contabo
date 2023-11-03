@@ -1,7 +1,7 @@
 {
   "version": 3,
   "sources": ["../../src/model/InstancesResponse.ts"],
-  "sourcesContent": ["import { Pagination } from './Pagination';\n\nexport interface InstancesResponse {\n\t_pagination: Pagination;\n}\n"],
+  "sourcesContent": ["import { Instance } from './Instance';\nimport { Links } from './Links';\nimport { Pagination } from './Pagination';\n\nexport interface InstancesResponse {\n\t_pagination: Pagination;\n\t_links: Links;\n\tdata: Array<Instance>;\n}\n"],
   "mappings": ";;;;;;;;;;;;;;AAAA;AAAA;",
   "names": []
 }
